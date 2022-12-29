@@ -1,4 +1,5 @@
 """Crypto exchange indicator application"""
+__version__ = '1.0.0'
 
 import ccxt
 import talib
