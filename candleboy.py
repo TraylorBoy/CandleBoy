@@ -1,14 +1,19 @@
 """Crypto exchange indicator application"""
-__version__ = '1.0.0'
+__version__ = '1.1.0'
 
-import ccxt
 import talib
 import numpy
+
+from phemexboy import PhemexBoy
+
+# TODO: Add errors
+# TODO: Refactor - self.client = {'phemex': setup(exchange)}
+# TODO: Add logging
 
 
 class CandleBoy:
     def __init__(self):
-        self.phemex_client = ccxt.phemex()
+        self.phemex_client = PhemexBoy()
 
 # ------------------------------ Utility Methods ----------------------------- #
 
@@ -22,15 +27,17 @@ class CandleBoy:
         exchange (String) - Exchange code to retrieve timeframes from (ex. phemex)
         """
         if exchange == 'phemex':
-            return self.phemex_client.timeframes
+            return self.phemex_client.timeframes()
 
-    def timestamp(self, date):
+    def timestamp(self, exchange, date):
         """Creates UTC timestamp from date
 
-        date (String) - Date to convert to timestamp, YEAR-MONTH-DAY (ex. 2018-12-01)
+        date (String) - Date to convert to timestamp, YEAR-MONTH-DAY (ex.
+        2018-12-01)
+        exchange (String) - Exchange code to retrieve timeframes from (ex. phemex)
         """
-        formatted_date = date + 'T00:00:00Z'
-        return self.phemex_client.parse8601(formatted_date)
+        if exchange == 'phemex':
+            return self.phemex_client.timestamp(date)
 
     def ohlcv(self, exchange, symbol, tf, since=None):
         """Retrieve the open - high - low - close - volume data from exchange
@@ -49,9 +56,8 @@ class CandleBoy:
         volume = []
 
         if exchange == 'phemex':
-            self.phemex_client.load_markets(True)
-            candles = self.phemex_client.fetch_ohlcv(
-                symbol, tf, since, limit=1000)
+            candles = self.phemex_client.ohlcv(
+                symbol, tf, since)
             # First value is timestamp
             # Then the following values are:
             # Open, High, Low, Close, Volume

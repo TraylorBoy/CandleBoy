@@ -13,7 +13,7 @@ def test_utility():
     assert len(client.ohlcv(exchange='phemex',
                             symbol='BTC/USD:USD', tf='1m')) > 0
     assert len(client.ohlcv(exchange='phemex', symbol='BTC/USD:USD',
-                            tf='1m', since=client.timestamp('2021-12-29'))) > 0
+                            tf='1m', since=client.timestamp(exchange='phemex', date='2021-12-29'))) > 0
 
 
 def test_macd():
