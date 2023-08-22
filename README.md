@@ -21,6 +21,8 @@ pip install candleboy
 ## Usage
 ### Instantiation
 ```
+from candleboy.core import CandleBoy
+
 # Only exchange at the moment is phemex
 # Verbose shows logging
 client = CandleBoy(exchange='phemex', verbose=True)
