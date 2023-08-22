@@ -1,2 +1,2 @@
 test:
-	python3 test.py
+	python3 -m unittest -f -v candleboy/tests/core_tests.py
