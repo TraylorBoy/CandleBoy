@@ -1,14 +1,11 @@
 # CandleBoy
 Crypto exchange indicator application
 
-## Todo
-- Add more indicators
-- Add more exchanges
-
 ## Notes
 - Only exchange is Phemex so far, they require specific symbols for SPOT and FUTURE
 - SPOT Symbols start with *s* and are handled in USDT ex. sBTCUSDT
 - FUTURE Symbols are all formatted as so *BTC/USD:USD*
+- Can create symbols with ```symbol``` method
 
 ## Installation
 - Requires TA-Lib which may be difficult to install
@@ -61,9 +58,9 @@ _, _, _, _, close, _ = client.ohlcv(symbol, '1m')
 macd, signal, histogram = client.macd(close)
 
 # May optionally change parameters (default is 12, 26, 9)
-fastperiod=9
-slowperiod=12
-signalperiod=3
+fastperiod = 9
+slowperiod = 12
+signalperiod = 3
 
 macd, signal, histogram = client.macd(close, fastperiod, slowperiod, signalperiod)
 ```
@@ -78,6 +75,22 @@ ema = client.ema(close)
 timeperiod = 20
 
 ema = client.ema(close, timeperiod)
+```
+
+### Get Stochastic Indicator Values
+```
+symbol = client.symbol(base='BTC', quote='USD', code='future')
+_, _, high, low, close, _ = client.ohlcv(symbol, '1m')
+slowk, slowd = client.stoch(high, low, close)
+
+# May optionally change parameters (default is 5, 3, 0, 3, 0)
+fastk_period = 5
+slowk_period = 3
+slowk_matype = 0
+slowd_period = 3
+slowd_matype = 0
+
+slowk, slowd = client.stoch(high, low, close, fastk_period, slowk_period, slowk_matype, slowd_period, slowd_matype)
 ```
 
 ## Test
