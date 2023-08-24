@@ -177,6 +177,6 @@ class CandleBoy:
         low = numpy.array(low, dtype=float)
         close = numpy.array(close, dtype=float)
 
-        slowk, slowd = talib.STOCH(high, low, close, fastk_period=5, slowk_period=3, slowk_matype=0, slowd_period=3, slowd_matype=0)
+        slowk, slowd = talib.STOCH(high, low, close, fastk_period, slowk_period, slowk_matype, slowd_period, slowd_matype)
 
         return slowk, slowd
