@@ -87,8 +87,3 @@ ema = client.ema(close, timeperiod)
 ```
 make test
 ```
-
-or
-
-```
-python3 test

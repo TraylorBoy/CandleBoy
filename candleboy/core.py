@@ -165,3 +165,18 @@ class CandleBoy:
         real = talib.EMA(close, timeperiod)
 
         return real
+
+    def stoch(self, high: list, low: list, close: list, fastk_period: int = 5, slowk_period: int = 3, slowk_matype: int = 0, slowd_period: int = 3, slowd_matype: int = 0):
+        """Returns the Stochastic indicator values
+
+        See TA-Lib docs for details on parameters.
+        https://mrjbq7.github.io/ta-lib/func_groups/momentum_indicators.html
+        """
+        # Format
+        high = numpy.array(high, dtype=float)
+        low = numpy.array(low, dtype=float)
+        close = numpy.array(close, dtype=float)
+
+        slowk, slowd = talib.STOCH(high, low, close, fastk_period=5, slowk_period=3, slowk_matype=0, slowd_period=3, slowd_matype=0)
+
+        return slowk, slowd

@@ -30,9 +30,13 @@ class TestCore(unittest.TestCase):
         symbol = candle.symbol(base='BTC', quote='USD', code='future')
         tf = '1m'
 
-        _, _, _, _, close, _ = candle.ohlcv(symbol, '1m')
+        _, _, high, low, close, _ = candle.ohlcv(symbol, '1m')
         macd, _, _ = candle.macd(close)
         self.assertGreater(len(list(macd)), 0)
 
         ema = candle.ema(close)
         self.assertGreater(len(list(ema)), 0)
+
+        slowk, _ = candle.stoch(high, low, close)
+        print(slowk)
+        self.assertGreater(len(list(slowk)), 0)
