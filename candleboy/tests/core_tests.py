@@ -39,3 +39,9 @@ class TestCore(unittest.TestCase):
 
         slowk, _ = candle.stoch(high, low, close)
         self.assertGreater(len(list(slowk)), 0)
+
+        adx = candle.adx(high, low, close)
+        self.assertGreater(len(list(adx)), 0)
+
+        mama, _ = candle.mesa(close)
+        self.assertGreater(len(list(mama)), 0)

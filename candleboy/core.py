@@ -141,7 +141,7 @@ class CandleBoy:
         """Returns the Moving Average Convergence/Divergence indicator values
 
         See TA-Lib docs for details on parameters.
-        https://mrjbq7.github.io/ta-lib/func_groups/momentum_indicators.html
+        https://ta-lib.github.io/ta-lib-python/
         """
         # Format
         close = numpy.array(close, dtype=float)
@@ -156,7 +156,7 @@ class CandleBoy:
         """Returns the Exponential Moving Average indicator values
 
         See TA-Lib docs for details on parameters.
-        https://mrjbq7.github.io/ta-lib/func_groups/momentum_indicators.html
+        https://ta-lib.github.io/ta-lib-python/
         """
         # Format
         close = numpy.array(close, dtype=float)
@@ -170,7 +170,7 @@ class CandleBoy:
         """Returns the Stochastic indicator values
 
         See TA-Lib docs for details on parameters.
-        https://mrjbq7.github.io/ta-lib/func_groups/momentum_indicators.html
+        https://ta-lib.github.io/ta-lib-python/
         """
         # Format
         high = numpy.array(high, dtype=float)
@@ -180,3 +180,31 @@ class CandleBoy:
         slowk, slowd = talib.STOCH(high, low, close, fastk_period, slowk_period, slowk_matype, slowd_period, slowd_matype)
 
         return slowk, slowd
+
+    def adx(self, high: list, low: list, close: list, timeperiod: int = 14):
+        """Returns the ADX indicator values
+
+        See TA-Lib docs for details on parameters.
+        https://ta-lib.github.io/ta-lib-python/
+        """
+        # Format
+        high = numpy.array(high, dtype=float)
+        low = numpy.array(low, dtype=float)
+        close = numpy.array(close, dtype=float)
+
+        real = talib.ADX(high, low, close, timeperiod)
+
+        return real
+
+    def mesa(self, close: list, fastlimit: int = 0.5, slowlimit: int = 0.05):
+        """Returns the MESA indicator values
+
+        See TA-Lib docs for details on parameters.
+        https://ta-lib.github.io/ta-lib-python/
+        """
+        # Format
+        close = numpy.array(close, dtype=float)
+
+        mama, fama = talib.MAMA(close, fastlimit, slowlimit)
+
+        return mama, fama

@@ -93,6 +93,31 @@ slowd_matype = 0
 slowk, slowd = client.stoch(high, low, close, fastk_period, slowk_period, slowk_matype, slowd_period, slowd_matype)
 ```
 
+### Get ADX Indicator Values
+```
+symbol = client.symbol(base='BTC', quote='USD', code='future')
+_, _, high, low, close, _ = client.ohlcv(symbol, '1m')
+adx = client.adx(high, low, close)
+
+# May optionally change parameters (default is 14)
+timeperiod = 14
+
+adx = client.stoch(high, low, close, timeperiod)
+```
+
+### Get MESA Indicator Values
+```
+symbol = client.symbol(base='BTC', quote='USD', code='future')
+_, _, _, _, close, _ = client.ohlcv(symbol, '1m')
+mama, fama = client.mesa(close)
+
+# May optionally change parameters (default is 0.5, 0.05)
+fastlimit = 0.5
+slowlimit = 0.05
+
+mama, fama = client.mesa(close, fastlimit, slowlimit)
+```
+
 ## Test
 
 - Runs the tests on the CandleBoy module
